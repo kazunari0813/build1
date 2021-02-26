@@ -1,0 +1,21 @@
+<% if @post.errors.any? %>
+	<div id="error_explanation" class="alert alert-danger">
+		<ul>
+			<% @post.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<div class="form-group">
+		<%=f.label :title, "タイトル" %>
+		<%=f.text_field :title, class: "form-control", placeholder:"タイトル(30字以内)" %>
+	</div>
+	<div class="form-group">
+		<%=f.label :body, "本文" %>
+		<%=f.text_area :body, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%=f.label :image, "投稿画像" %><br>
+		<%=f.attachment_field :image %>
+	</div>

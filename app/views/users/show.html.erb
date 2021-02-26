@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="row">
+		<table class="table">
+			<tr><%= attachment_image_tag(@user, :profile_image, :fill,100, 100, fallback: "no_image.jpeg") %></tr>
+			<tr>
+				<th>name</th>
+				<th><%= @user.name %></th>
+			</tr>
+		</table>
+		<div class="row">
+			<%= link_to '編集', edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{@user.id}" %>
+		</div>

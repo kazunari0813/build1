@@ -5,7 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
          has_many :posts, dependent: :destroy
-         has_many :comment, dependent: :destroy
-         has_many :favorite, dependent: :destroy
+         has_many :comments, dependent: :destroy
+         has_many :favorites, dependent: :destroy
          attachment :profile_image
+
+         def already_favorited?(post)
+    self.favorites.exists?(post_id: post.id)
+  end
 end
