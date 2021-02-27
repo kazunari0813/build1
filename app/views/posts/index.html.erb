@@ -6,9 +6,9 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row p-md-3">
   <% @posts.each do |post| %>
-   	<div class="card">
+   	<div class="card m-md-3">
    		<div class="row">
    			<div class="col-md-12">
    				<div class="card-image">
@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="profile_image">
 					<%= attachment_image_tag post.user, :profile_image, size: "58x58", fallback: "no_image.png", class: "profile_image" %>
 				</div>
@@ -33,19 +33,21 @@
 			</div>
   	</div>
   	<div class="row">
-  		<div class="col-md-5">
+  		<div class="col-md-5 ml-md-3">
    			<time><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
-   				<% if current_user.already_favorited?(post) %>
-          	<%= link_to post_favorites_path(post), method: :delete do %>
-          	<i class="fas fa-heart" style="color: red;"></i>
-          	<% end %>
-            <%= post.favorites.count %>
+
+          <% if post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(post), method: :delete do %>
+              <i class="fas fa-heart" style="color: red;"></i>
+              <%= post.favorites.count %>いいね
+            <% end %>
           <% else %>
             <%= link_to post_favorites_path(post), method: :post do %>
-            <i class="far fa-heart"></i>
+              <i class="far fa-heart"></i>
+                <%= post.favorites.count %>
             <% end %>
-            <%= post.favorites.count %>
           <% end %>
+
     		</div>
   		</div>
 		</div>

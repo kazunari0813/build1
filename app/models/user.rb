@@ -9,7 +9,5 @@ class User < ApplicationRecord
          has_many :favorites, dependent: :destroy
          attachment :profile_image
 
-         def already_favorited?(post)
-    self.favorites.exists?(post_id: post.id)
-  end
+         
 end

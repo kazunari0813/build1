@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
 
-	def asbout
-		
+	def about
 	end
 end

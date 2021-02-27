@@ -9,7 +9,7 @@
 <div class="row p-md-5">
 	<div class="col-md-3 ml-5">
 		<figure class="user_image">
-			<%= attachment_image_tag(@user, :profile_image, :fill,128, 128, fallback: "no_image.jpeg") %>
+			<%= attachment_image_tag(@user, :profile_image, size: "300x300", fallback: "no_image.png") %>
 		</figure>
 	</div>
 	<div class="col-md-5">
@@ -33,9 +33,11 @@
 			</div>
 		</div>
 	</div>
+	<% if current_user.id == @user.id %>
 		<div class="col-md-2 ml-5 mt-5">
 			<div class="edit-btn">
 				<%= link_to '編集', edit_user_path(@user), class: "btn btn-primary" %>
+				<% end %>
 			</div>
 		</div>
 	</div>
