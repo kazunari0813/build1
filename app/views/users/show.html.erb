@@ -1,12 +1,81 @@
-<div class="container">
-	<div class="row">
-		<table class="table">
-			<tr><%= attachment_image_tag(@user, :profile_image, :fill,100, 100, fallback: "no_image.jpeg") %></tr>
-			<tr>
-				<th>name</th>
-				<th><%= @user.name %></th>
-			</tr>
-		</table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="display-4">
+      ユーザー詳細
+    </div>
+  </div>
+</div>
+
+<div class="row p-md-5">
+	<div class="col-md-3 ml-5">
+		<figure class="user_image">
+			<%= attachment_image_tag(@user, :profile_image, :fill,128, 128, fallback: "no_image.jpeg") %>
+		</figure>
+	</div>
+	<div class="col-md-5">
 		<div class="row">
-			<%= link_to '編集', edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{@user.id}" %>
+			<div class="col-md-6">
+				<div class="user_name">
+					<%= @user.name %>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="email">
+					<% if current_user.id == @user.id %>
+						<%= @user.email %>
+					<% end %>
+				</div>
+			</div>
+			<div class="row mt-5">
+				<div class="col-md-12">
+					<%= @user.profile %>
+				</div>
+			</div>
 		</div>
+	</div>
+		<div class="col-md-2 ml-5 mt-5">
+			<div class="edit-btn">
+				<%= link_to '編集', edit_user_path(@user), class: "btn btn-primary" %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row p-md-4">
+	<% @user.posts.each do |post| %>
+		<div class="card mx-md-4">
+			<%= link_to post_path(post) do %>
+      	<%= attachment_image_tag post, :image, size: "300x300", fallback: "no_image.png" %>
+      <% end %>
+  		<div class="card-body">
+    		<p class="card-text">
+    			<%= link_to post_path(post) do %>
+            <span class="panel-icon">
+              <i class="fas fa-book" aria-hidden="true"></i>
+            </span>
+            	この投稿を見る
+          <% end %>
+        </p>
+  		</div>
+  		<% if @user.id == current_user.id %>
+  			<ul class="list-group list-group-flush">
+    			<li class="list-group-item">
+            <%= link_to edit_post_path(post) do %>
+              <span class="panel-icon">
+                <i class="fas fa-edit"></i>
+              </span>
+                この投稿を編集する
+            <% end %>
+        	</li>
+    			<li class="list-group-item"><%= link_to post_path(post), method: :delete, data: {confirm: "削除しますか？"} do %>
+          	<span class="panel-icon">
+             	<i class="fas fa-trash"></i>
+            </span>
+            	この投稿を削除する
+          	<% end %>
+       		</li>
+  			</ul>
+  		<% end %>
+		</div>
+	<% end %>
+</div>
