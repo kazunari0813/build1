@@ -6,74 +6,116 @@
   </div>
 </div>
 
-
 <div class="row  p-md-4">
   <div class="col-md-7">
-	 <div class="card">
-		<div class="card-item">
-			<div class="row">
-   			<div class="col-md-12">
-				  <%= attachment_image_tag @post, :image, size: "799x694" %>
+    <div class="card">
+		  <div class="card-item">
+        <div class="row">
+   			  <div class="col-md-12">
+				    <%= attachment_image_tag @post, :image, size: "799x694" %>
+          </div>
         </div>
       </div>
-    </div>
-		<div class="row">
-		  <div class="col-md-12">
-        <div class="card-title">
-					<%= @post.title %>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-		  <div class="col-md-12">
-				<table class="table">
-					<caption></caption>
-        	<tr>
-          	<th　scope="col"><div class="toukou">投稿</div></th　scope="col">
-          </tr>
-          <tr>
-          	<td><%= @post.body %></td>
-          </tr>
-        </table>
+		  <div class="row ml-md-2">
+		    <div class="col-md-12">
+          <div class="card-title">
+	         <%= @post.title %>
+				  </div>
+        </div>
+		  </div>
+		  <div class="row ml-md-2">
+		    <div class="col-md-12">
+				  <table class="table">
+		        <caption></caption>
+              <tr>
+                <th　scope="col"><div class="toukou">投稿</div></th　scope="col">
+              </tr>
+              <tr>
+          	   <td><%= @post.body %></td>
+              </tr>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8">
-      	<div class="edit-btn">
-        	<% if @post.user.id == current_user.id %>
-						<%= link_to"編集画面へ", edit_post_path(@post), class: "btn btn-success" %>
-					<% end %>
-				</div>
-			</div>
-			<div class="col-md-4">
-			<!-- いいね機能 -->
-      <% if @post.favorited_by?(current_user) %>
-        <%= link_to post_favorites_path(@post), method: :delete do %>
-          <i class="fas fa-heart" style="color: red;"></i>
-          <%= @post.favorites.count %>
-        <% end %>
-      <% else %>
-        <%= link_to post_favorites_path(@post), method: :post do %>
-          <i class="far fa-heart"></i>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="edit-btn">
+            <% if @post.user.id == current_user.id %>
+		          <%= link_to"編集画面へ", edit_post_path(@post), class: "btn btn-success" %>
+				    <% end %>
+				  </div>
+		    </div>
+		    <div class="col-md-4">
+		    <!-- いいね機能 -->
+        <% if @post.favorited_by?(current_user) %>
+          <%= link_to post_favorites_path(@post), method: :delete do %>
+            <i class="fas fa-heart" style="color: red;"></i>
             <%= @post.favorites.count %>
           <% end %>
-      <% end %>
+        <% else %>
+          <%= link_to post_favorites_path(@post), method: :post do %>
+            <i class="far fa-heart"></i>
+            <%= @post.favorites.count %>
+          <% end %>
+        <% end %>
+        <!-- いいね機能 ここまで -->
+      </div>
     </div>
-  </div>
+    <!-- コメント投稿フォーム -->
+    <div class="row px-md-3">
+      <div class="col-md-12">
+        <%= form_for [@post, @comment] do |f| %>
+          <div class="form-group">
+            <%= f.text_area :comment, class: "form-control", placeholder:"コメントする" %>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-md-2">
+        <div class="col-md-10">
+      </div>
+      <div class="col-md-2">
+        <%= f.submit "投稿する", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
 </div>
-	</div>
-	<div class="col-md-4">
-		<div class="card">
-    	<h5 class="card-header">By<%= @post.user.name %></h5>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <h5 class="card-header">By<%= @post.user.name %></h5>
       <div class="card-body">
-      <p class="card-text"><%= @post.user.profile %></p>
+        <p class="card-text"><%= @post.user.profile %></p>
         <%= link_to user_path(@post.user), class: "btn btn-primary" do %>
           <span class="panel-icon">
             <i class="fas fa-user" aria-hidden="true"></i>
           </span>
-            <%= @post.user.name %>さんのページへ
+          <%= @post.user.name %>さんのページへ
         <% end %>
       </div>
     </div>
+
+    <% @post.comments.each do |comment| %>
+      <div class="row mt-md-4">
+        <div class="col-md-12">
+          <div class="card">
+            <h5 class="card-header"><%= comment.user.name %>さんからのコメント</h5>
+            <div class="card-body">
+              <p class="card-text">
+                <%= attachment_image_tag(comment.user, :profile_image, size:"40x40", fallback:"no_image.png") %>
+                <%= comment.comment %>
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-md-9">
+              </div>
+              <div class="col-md-2 my-md-3">
+                <% if comment.user == current_user %>
+                  <%= link_to "削除",post_comment_path(@post.id,comment.id),method: :delete,data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-outline-danger" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

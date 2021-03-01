@@ -33,23 +33,30 @@
 			</div>
   	</div>
   	<div class="row">
+      <div class="col-md-5 ml-md-5">
+        コメント：<%= post.comments.count %>件
+      </div>
   		<div class="col-md-5 ml-md-3">
-   			<time><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
-
-          <% if post.favorited_by?(current_user) %>
-            <%= link_to post_favorites_path(post), method: :delete do %>
-              <i class="fas fa-heart" style="color: red;"></i>
+        <% if post.favorited_by?(current_user) %>
+          <%= link_to post_favorites_path(post), method: :delete do %>
+            <i class="fas fa-heart" style="color: red;"></i>
+            <%= post.favorites.count %>いいね
+          <% end %>
+        <% else %>
+          <%= link_to post_favorites_path(post), method: :post do %>
+            <i class="far fa-heart"></i>
               <%= post.favorites.count %>いいね
             <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(post), method: :post do %>
-              <i class="far fa-heart"></i>
-                <%= post.favorites.count %>
-            <% end %>
           <% end %>
-
     		</div>
   		</div>
-		</div>
+      <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+          <time><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+        </div>
+      </div>
+    </div>
  	<% end %>
 </div>
