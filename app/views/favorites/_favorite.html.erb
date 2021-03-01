@@ -1,0 +1,13 @@
+<div id="favorites_buttons_<%= post.id %>">
+	<% if post.favorited_by?(current_user) %>
+  <%= link_to post_favorites_path(post.id), method: :delete, remote: true do %>
+    <i class="fas fa-heart" style="color: red;"></i>
+    <%= post.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to post_favorites_path(post.id), method: :post, remote: true do %>
+    <i class="far fa-heart"></i>
+      <%= post.favorites.count %>
+    <% end %>
+<% end %>
+</div>
