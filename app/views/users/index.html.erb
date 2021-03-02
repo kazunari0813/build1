@@ -6,18 +6,16 @@
   </div>
 </div>
 
-
-
 <div class="row px-md-4">
   <% @users.each do |user| %>
   <div class="col-md-3 my-md-4">
    	<div class="card">
    		<div class="row">
-   			<div class="col-md-12">
+   			<div class="col-md-12 ml-md-1">
    				<div class="card-image">
    					<figure class="post-image">
        				<%= link_to user_path(user) do %>
-       				<%= attachment_image_tag user, :profile_image, size: "310x290", fallback: "no_image.png" %>
+       				<%= attachment_image_tag user, :profile_image, size: "315x290", fallback: "no_image.png" %>
        				<% end %>
        			</figure>
        		</div>

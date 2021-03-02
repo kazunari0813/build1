@@ -6,6 +6,17 @@
   </div>
 </div>
 
+
+<div id="box">
+  <div id="images">
+    <div class="image1"></div>
+    <div class="image2"></div>
+    <div class="image3"></div>
+    <div class="image4"></div>
+    <div class="image5"></div>
+  </div>
+</div>
+
 <div class="row p-md-3">
   <% @posts.each do |post| %>
    	<div class="card m-md-3">
@@ -21,7 +32,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-4 ml-md-3">
 					<div class="profile_image">
 				    <%= attachment_image_tag post.user, :profile_image, size: "58x58", fallback: "no_image.png", class: "profile_image" %>
 				  </div>

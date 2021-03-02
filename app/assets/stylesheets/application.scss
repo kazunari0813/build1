@@ -17,6 +17,27 @@
 
 @import "bootstrap";
 
+
+
+/* 高さを指定することにより画像が表示される */
+#box{
+  height: 500px;
+}
+.image1 {
+  background-image: url(image1.png);
+}
+.image2 {
+  background-image: url(image2.png);
+}
+.image3 {
+  background-image: url(image3.png);
+}
+.image4 {
+  background-image: url(image4.png);
+}
+.image5 {
+  background-image: url(image5.png);
+}
 .panel-footer{
 	background-color: #40e0d0;
 	height: 40px;
