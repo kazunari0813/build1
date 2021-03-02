@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'posts#index'
   get '/about' => 'home#about'
+  get 'search' => 'users#search'
   resources :users, only:[:index, :show, :edit, :update]
   resources :posts, only:[:index, :show, :create, :edit, :update, :new, :destroy] do
   	resources :comments, only:[:create, :destroy]
