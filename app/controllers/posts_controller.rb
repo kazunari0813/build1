@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
 	def index
 		@posts = Post.all
+		@posts = @posts.page(params[:page]).per(6)
 		@post = Post.new
 	end
 
