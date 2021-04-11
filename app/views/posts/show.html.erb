@@ -31,7 +31,7 @@
                 <th　scope="col"><div class="toukou">投稿</div></th　scope="col">
               </tr>
               <tr>
-          	   <td><%= @post.body %></td>
+                <td><%= @post.body %></td>
               </tr>
           </table>
         </div>
@@ -46,34 +46,34 @@
 		    </div>
 		    <div class="col-md-4">
 		    <!-- いいね機能 -->
-        <div id="favorites_buttons_<%= @post.id %>">
-          <%= render partial: 'favorites/favorite', locals: { post: @post} %>
-        </div>
-        <!-- いいね機能 ここまで -->
-      </div>
-    </div>
-    <!-- コメント投稿フォーム -->
-    <div class="row px-md-3">
-      <div class="col-md-12">
-        <%= form_for [@post, @comment] do |f| %>
-          <div class="form-group">
-            <%= f.text_area :comment, class: "form-control", placeholder:"コメントする" %>
+          <div id="favorites_buttons_<%= @post.id %>">
+            <%= render partial: 'favorites/favorite', locals: { post: @post} %>
           </div>
+          <!-- いいね機能 ここまで -->
+        </div>
+      </div>
+      <!-- コメント投稿フォーム -->
+      <div class="row px-md-3">
+        <div class="col-md-12">
+          <%= form_for [@post, @comment] do |f| %>
+            <div class="form-group">
+              <%= f.text_area :comment, class: "form-control", placeholder:"コメントする" %>
+            </div>
         </div>
       </div>
       <div class="row mb-md-2">
         <div class="col-md-10">
-      </div>
-      <div class="col-md-2">
-        <%= f.submit "投稿する", class: "btn btn-primary" %>
-        <% end %>
+        </div>
+        <div class="col-md-2">
+          <%= f.submit "投稿する", class: "btn btn-primary" %>
+          <% end %>
+        </div>
       </div>
     </div>
-</div>
   </div>
-  <div class="col-md-4">
-    <div class="card">
-      <h5 class="card-header">By<%= @post.user.name %></h5>
+<div class="col-md-4">
+  <div class="card">
+    <h5 class="card-header">By<%= @post.user.name %></h5>
       <div class="card-body">
         <p class="card-text"><%= @post.user.profile %></p>
         <%= link_to user_path(@post.user), class: "btn btn-primary" do %>
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <% @post.comments.each do |comment| %>
+    <% @comments.each do |comment| %>
       <div class="row mt-md-4">
         <div class="col-md-12">
           <div class="card">
@@ -109,5 +109,12 @@
         </div>
       </div>
     <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 ml-md-3">
+  </div>
+  <div class="col-md-2 ml-md-5">
+    <%= paginate @comments %>
   </div>
 </div>

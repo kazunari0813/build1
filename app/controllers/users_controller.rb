@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.all
+		@users = @users.page(params[:page]).per(8)
 	end
 
 	def show
@@ -34,6 +35,10 @@ class UsersController < ApplicationController
 		else
 			@posts = Post.search(params[:search], @user_or_post)
 		end
+		@users = User.all
+		@users = @users.page(params[:page]).per(8)
+		@posts = Post.all
+		@posts = @posts.page(params[:page]).per(6)
 	end
 
 	private

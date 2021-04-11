@@ -18,20 +18,20 @@
             <div class="col-md-12">
               <div class="user_name">
                 <%=link_to user.name, user_path(user) %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="toukou">
-              投稿数：<%= user.posts.count %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="toukou">
+                投稿数：<%= user.posts.count %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 <% elsif @user_or_post == "2" %>
   <div class="row p-md-3">
     <% @posts.each do |post| %>
@@ -87,3 +87,10 @@
   </div>
 <% else %>
 <% end %>
+<div class="row">
+  <div class="col-md-5 ml-md-3">
+  </div>
+  <div class="col-md-4 ml-md-5">
+<%= paginate @posts %>
+</div>
+</div>
