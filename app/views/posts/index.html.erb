@@ -34,10 +34,25 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-5 ml-md-5">
+        <div class="col-md-4">
           コメント：<%= post.comments.count %>件
         </div>
-  		  <div class="col-md-5 ml-md-3">
+        <div class="col-md-5">
+          <div id="star-rate-<%= post.id %>">
+            <script>
+              $('#star-rate-<%= post.id %>').empty();
+              $('#star-rate-<%= post.id %>').raty({
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                half: true,
+                readOnly: true,
+                score: <%= post.rate %>,
+              });
+            </script>
+          </div>
+        </div>
+  		  <div class="col-md-3">
           <!-- いいね -->
           <% if user_signed_in? %>
             <%= render partial: 'favorites/favorite', locals: { post: post} %>
@@ -47,6 +62,7 @@
               <%= post.favorites.count %>
             <% end %>
           <% end %>
+          <!--いいねここまで -->
     		</div>
   		</div>
       <div class="row">

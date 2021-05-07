@@ -35,6 +35,21 @@
 		          <%= link_to"編集画面へ", edit_post_path(@post), class: "btn btn-success" %>
 				    <% end %>
 				  </div>
+          <!-- 評価機能 -->
+          <div id="star-rate-<%= @post.id %>">
+            <script>
+              $('#star-rate-<%= @post.id %>').empty();
+              $('#star-rate-<%= @post.id %>').raty({
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                half: true,
+                readOnly: true,
+                score: <%= @post.rate %>,
+              })
+            </script>
+          </div>
+        <!-- 評価機能ここまで -->
 		    </div>
 		    <div class="col-md-4">
 		    <!-- いいね機能 -->

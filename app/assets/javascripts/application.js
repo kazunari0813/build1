@@ -17,6 +17,7 @@
 //= require_tree .
 //= require popper
 //= require bootstrap-sprockets
+//= require jquery.raty.js
 document.addEventListener("turbolinks:load", function () {
 
 $(document).ready(function () {

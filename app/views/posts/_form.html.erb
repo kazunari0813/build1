@@ -17,6 +17,24 @@
 	<%=f.text_area :body, class: "form-control" %>
 </div>
 <div class="form-group">
+	<div id="star">
+		<%=f.label :rate, "評価" %><br>
+		<%# scoreNameの値をhidden_fieldでカラムに送っている %>
+		<%=f.hidden_field :rate, :value => 'score' %>
+	</div>
+</div>
+
+<div class="form-group">
 	<%=f.label :image, "投稿画像" %><br>
 	<%=f.attachment_field :image %>
 </div>
+
+<script>
+	$('#star').raty({
+		starOn: "<%= asset_path('star-on.png') %>",
+		starOff: "<%= asset_path('star-off.png') %>",
+		starHalf: "<%= asset_path('star-half.png') %>",
+		scoreName: 'post[rate]',
+		half: true,
+	});
+</script>
