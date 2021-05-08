@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   root 'posts#index'
   get '/about' => 'home#about'
   get 'search' => 'users#search'
-  resources :users, only:[:index, :show, :edit, :update]
-  resources :relationships, only: [:create, :destroy]
+  resources :users, only:[:index, :show, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    get 'follows' => 'relationships#follower', as: 'follows'
+    get 'followers' => 'relationships#followed', as: 'followers'
+  end
   resources :posts, only:[:index, :show, :create, :edit, :update, :new, :destroy] do
   	resources :comments, only:[:create, :destroy]
     resource :favorites, only:[:create, :destroy]
