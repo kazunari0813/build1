@@ -1,34 +1,34 @@
 <% @entries.each do |e| %>
   <div class="user-name">
-  <strong>
-    <%= attachment_image_tag(e.user, :profile_image, size: "100x100", fallback: "no_image.png") %>
+    <strong>
+      <%= attachment_image_tag(e.user, :profile_image, size: "100x100", fallback: "no_image.png") %>
       <a class="rooms-user-link" href="/users/<%= e.user.id %>">
         <%= e.user.name %>さん
       </a>
-  </strong>
+    </strong>
   </div>
 <% end %>
 <hr>
-<div class="chats">
-  <div class="chat">
-    <% if @messages.present? %>
-      <% @messages.each do |m| %>
-        <div class="chat-box">
-          <div class="chat-face">
-            <%= attachment_image_tag(m.user, :profile_image, size: "100x100", fallback: "no_image.png") %>
-          </div>
-          <div class="chat-hukidashi"> <strong><%= m.message %></strong> <br>
-            <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
-          </div>
+<% if @messages.present? %>
+  <% @messages.each do |m| %>
+    <% if m.user_id == current_user.id %>
+      <% user = User.find(m.user_id) %>
+      <div class="current-user">
+        <div class="message-box">
+          <strong><%= m.message %></strong>
+          <%= attachment_image_tag(m.user, :profile_image, size: "80x80", fallback: "no_image.png") %>
         </div>
-      <% end %>
+      </div>
+    <% else %>
+    <div class="message-box">
+      <%= attachment_image_tag(m.user, :profile_image, size: "80x80", fallback: "no_image.png") %>
+      <strong><%= m.message %></strong><br>
+    </div>
     <% end %>
-  </div>
-  <div class="posts">
-    <%= form_for @message do |f| %>
-      <%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-          <%= f.submit "投稿",class: 'form-submit'%>
-    <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>
+  <%= form_for @message do |f| %>
+    <%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.submit "投稿",class: 'form-submit'%>
+  <% end %>
