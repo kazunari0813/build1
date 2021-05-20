@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 		end
 		@users = User.all
 		@users = @users.page(params[:page]).per(8)
-		@posts = Post.all
+		@posts = Post.includes(:user) #Post.allから変更
 		@posts = @posts.page(params[:page]).per(6)
 	end
 

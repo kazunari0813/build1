@@ -2,14 +2,14 @@ class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index]
 
 	def index
-		@posts = Post.all
+		@posts = Post.includes(:user) #Post.allから変更
 		@posts = @posts.page(params[:page]).per(6)
 		@post = Post.new
 	end
 
 	def show
 		@post = Post.find(params[:id])
-		@comments = @post.comments.page(params[:page]).per(4)
+		@comments = @post.comments.includes(:user).page(params[:page]).per(4) # @post.comments.page(params[:page]).per(4)から変更
 		@comment = Comment.new
 	end
 
