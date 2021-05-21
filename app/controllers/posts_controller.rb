@@ -3,13 +3,13 @@ class PostsController < ApplicationController
 
 	def index
 		@posts = Post.includes(:user) #Post.allから変更
-		@posts = @posts.page(params[:page]).per(6)
+		@posts = @posts.page(params[:page]).per(6).order(id: "DESC")
 		@post = Post.new
 	end
 
 	def show
 		@post = Post.find(params[:id])
-		@comments = @post.comments.includes(:user).page(params[:page]).per(4) # @post.comments.page(params[:page]).per(4)から変更
+		@comments = @post.comments.includes(:user).page(params[:page]).per(4).order(id: "DESC") # @post.comments.page(params[:page]).per(4)から変更
 		@comment = Comment.new
 	end
 

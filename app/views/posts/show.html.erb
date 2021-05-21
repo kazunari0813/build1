@@ -36,19 +36,7 @@
 				    <% end %>
 				  </div>
           <!-- 評価機能 -->
-          <div id="star-rate-<%= @post.id %>">
-            <script>
-              $('#star-rate-<%= @post.id %>').empty();
-              $('#star-rate-<%= @post.id %>').raty({
-                starOn: "<%= asset_path('star-on.png') %>",
-                starOff: "<%= asset_path('star-off.png') %>",
-                starHalf: "<%= asset_path('star-half.png') %>",
-                half: true,
-                readOnly: true,
-                score: <%= @post.rate %>,
-              })
-            </script>
-          </div>
+          <%= render 'rate', post:@post %>
         <!-- 評価機能ここまで -->
 		    </div>
 		    <div class="col-md-4">
