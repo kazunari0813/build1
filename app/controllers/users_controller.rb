@@ -19,8 +19,7 @@ class UsersController < ApplicationController
 					end
 				end
 			end
-			if @isRoom
-			else
+			unless @isRoom
 				@room = Room.new
 				@entry = Entry.new
 			end

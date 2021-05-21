@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
 		if @post.save
-			redirect_to @post,nitice: "投稿に成功しました！"
+			redirect_to @post,notice: "投稿に成功しました！"
 		else
 			@posts = Post.all
 			render 'new'

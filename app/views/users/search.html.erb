@@ -1,5 +1,5 @@
 <% if @user_or_post == "1"%>
-<%= render 'index', users:@users %>
+<%= render 'users/index', users:@users %>
 <% else @user_or_post == "2" %>
 <%= render 'posts/index', posts:@posts %>
 <% end %>
