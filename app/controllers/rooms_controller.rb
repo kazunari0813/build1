@@ -12,11 +12,11 @@ class RoomsController < ApplicationController
 	def show
 		@room = Room.find(params[:id])
 		if Entry.where(user_id: current_user.id, room_id: @room.id).present?
-			@messages = @room.messages.includes(:user)
+			@messages = @room.messages.includes(:user) #includes追加
 			@message = Message.new
 			@entries = @room.entries.includes(:user) #includes追加
 		else
-			redirect_back(fallback_location: root_path)
+			redirect_to posts_path, alert:'不正なアクセスです！'
 		end
 	end
 end

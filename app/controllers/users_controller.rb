@@ -49,13 +49,11 @@ class UsersController < ApplicationController
 		@user_or_post = params[:option]
 		if @user_or_post == "1"
 			@users = User.search(params[:search], @user_or_post)
+			@users = @users.page(params[:page]).per(8)
 		else
-			@posts = Post.search(params[:search], @user_or_post)
+			@posts = Post.search(params[:search], @user_or_post).includes(:user)
+			@posts = @posts.page(params[:page]).per(6)
 		end
-		@users = User.all
-		@users = @users.page(params[:page]).per(8)
-		@posts = Post.includes(:user) #Post.allから変更
-		@posts = @posts.page(params[:page]).per(6)
 	end
 
 	private

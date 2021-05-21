@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 	def edit
 		@post = Post.find(params[:id])
 		if @post.user != current_user
-			redirect_to posts_path, '不正なアクセスです！'
+			redirect_to posts_path, alert:'不正なアクセスです！'
 		end
 	end
 
