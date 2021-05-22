@@ -1,3 +1,31 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.main-image {
+	background-image: image-url('about_image.jpg');
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+}
+
+.about-caption {
+	padding: 50px 30px;
+	height: 1200px;
+	background-color: rgba(255, 255, 255, 0.2)
+}
+
+.about-title {
+	font-size: 80px;
+	color: #FFFF77;
+	margin-top: 100px;
+}
+.about-text {
+	font-size: 30px;
+	line-height: 80px;
+	padding: 0 5px;
+	color: #FFFF77;
+}
