@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
 			redirect_to post_path(@post)
 		else
 			@comments = @post.comments
-			render '/posts/show'
+			@comments = @comments.page(params[:page])
+			redirect_to post_path(@post)
 		end
 	end
 

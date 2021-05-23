@@ -1,12 +1,9 @@
 <!-- エラーメッセージ -->
 <% if @user.errors.any? %>
-<div class="error_explanation">
-	<h3><%= @user.errors.count %>error prohibited this obj from being saved:</h3>
+<div id="error_explanation" class="alert alert-danger">
 	<ul>
 		<% @user.errors.full_messages.each do |message| %>
-		<li>
-			<%= message %>
-		</li>
+		<li><%= message %></li>
 		<% end %>
 	</ul>
 </div>
