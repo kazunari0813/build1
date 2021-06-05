@@ -54,8 +54,8 @@
 	<!-- DM機能 -->
 	<div class="col-md-3 ml-4">
 		<% unless @user.me?(current_user.id) %>
-		<% if @isRoom == true %> <!--既にルームがあるか確認-->
-		<p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a></p>
+		<% if @is_room == true %> <!--既にルームがあるか確認-->
+		<p class="user-show-room"><a href="/rooms/<%= @room_id %>" class="btn btn-primary btn-lg">チャットへ</a></p>
 		<% else %>
 		<%= form_for @room do |f| %>
 		<%= fields_for @entry do |e| %>
