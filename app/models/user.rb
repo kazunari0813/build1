@@ -38,4 +38,8 @@ class User < ApplicationRecord
           def following?(user)
             following_user.include?(user)
           end
+
+          def me?(user_id)
+            id == user_id
+          end
 end
